@@ -1,0 +1,85 @@
+<div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+    <div class="flex justify-between mb-4 items-start">
+        <div class="font-medium">Workout(s) List</div>
+        <div class="dropdown">
+          <button type="button" (click)="exportToExcel()" class="bg-gray-900 text-sm font-medium text-white py-2 px-4 rounded-md">Export all Workout list</button>
+        </div>
+    </div>
+    <form action="" class="flex items-center mb-4">
+        <div class="relative w-full mr-2">
+            <input type="text" [(ngModel)]="searchText" class="py-2 pr-4 pl-10 bg-gray-50 w-full outline-none border border-gray-100 rounded-md text-sm focus:border-blue-500" placeholder="Search by Name" name="searchText">
+            <i class="ri-search-line absolute top-1/2 left-4 -translate-y-1/2 text-gray-400"></i>
+        </div>
+        <div class="text-gray-600 text-sm font-medium ml-2" title="Filter by Workout type">Filter by Workout type:</div>
+        <select [(ngModel)]="selectedWorkoutType" (change)="applyFilter()" name="selectedWorkoutType" class="text-sm py-2 pl-4 pr-10 bg-gray-50 border border-gray-100 rounded-md focus:border-blue-500 outline-none appearance-none bg-select-arrow bg-no-repeat bg-[length:16px_16px] bg-[right_16px_center]">
+          <option value="all">All</option>
+          <option>Cycling</option>
+          <option>Swimming</option>
+          <option>Running</option>
+          <option>Yoga</option>
+      </select>
+    </form>
+    <div class="overflow-x-auto">
+        <table class="w-full min-w-[540px]">
+  <thead>
+    <tr>
+      <th class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left rounded-tl-md rounded-bl-md">Name</th>
+      <th class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">Workout(s)</th>
+      <th class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">Number of Workout(s)</th>
+      <th class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">Total Workout Minutes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="(paginatedWorkouts | search: searchText)?.length > 0; else noItemsFound">
+    <tr *ngFor="let user of paginatedWorkouts | search: searchText">
+      <td class="py-2 px-4 border-b border-b-gray-50">
+        <div class="flex items-center">
+          <img src="https://i2.wp.com/a.slack-edge.com/df10d/img/avatars/ava_0021-192.png?ssl=1" alt="" class="w-8 h-8 rounded object-cover block">
+          <a href="/workoutlist" class="text-gray-600 text-sm font-medium hover:text-blue-500 ml-2 truncate">{{ user.name }}</a>
+        </div>
+      </td>
+      <td class="py-2 px-4 border-b border-b-gray-50">
+        <span class="text-[13px] font-medium text-gray-400">
+          <ng-container *ngFor="let workout of user.workouts; let isLast = last">
+            {{ workout.type }}
+            <ng-container *ngIf="!isLast">, </ng-container>
+          </ng-container>
+        </span>
+      </td>
+      <td class="py-2 px-4 border-b border-b-gray-50">
+        <span class="text-[13px] font-medium text-gray-400">{{ user.workouts.length }}</span>
+      </td>
+      <td class="py-2 px-4 border-b border-b-gray-50">
+        <span class="text-[13px] font-medium text-gray-400">
+          {{ getTotalMinutes(user.workouts) }}
+        </span>
+      </td>
+    </tr>
+    </ng-container>
+    <ng-template #noItemsFound>
+      <tr>
+        <td colspan="4" class="no-items-found-message">No items found:(</td>
+      </tr>
+    </ng-template>
+  </tbody>
+</table>
+          
+    </div>
+
+    <div class="flex items-center justify-between mt-4">
+      <div class="flex items-center space-x-2">
+        <button [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)" class="px-3 py-1 bg-gray-200 rounded-md text-sm" [ngClass]="{'opacity-50 cursor-not-allowed': currentPage === 1}">Previous</button> &nbsp;
+        <button *ngFor="let page of getPageNumbers()" (click)="changePage(page)" class="px-4 py-4 rounded-md text-sm" [ngClass]="{'bg-blue-500 text-white': currentPage === page, 'bg-gray-200': currentPage !== page}">{{ page }}</button> &nbsp;
+        <button [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)" class="px-3 py-1 bg-gray-200 rounded-md text-sm" [ngClass]="{'opacity-50 cursor-not-allowed': currentPage === totalPages}">Next</button>
+      </div>
+      <div class="flex items-center space-x-2">
+        <span class="text-sm">Items per page:</span>
+        <select [(ngModel)]="itemsPerPage" (change)="changeItemsPerPage()" name="itemsPerPage" class="text-sm py-1 px-2 bg-gray-50 border border-gray-100 rounded-md focus:border-blue-500 outline-none">
+          <option [value]="5">5</option>
+          <option [value]="10">10</option>
+          <option [value]="15">15</option>
+        </select>
+      </div>
+    </div>    
+      
+</div>

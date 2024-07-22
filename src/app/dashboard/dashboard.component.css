@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .user-list {
+    width: 30%;
+  }
+  
+  .chart-container {
+    width: 65%;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  li.selected {
+    background-color: #e0e0e0;
+  }
+  
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+  }

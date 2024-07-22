@@ -1,0 +1,67 @@
+  <!-- start: Sidebar -->
+  <div class="fixed left-0 top-0 w-64 h-full bg-gray-900 p-4 z-50 sidebar-menu transition-transform">
+      <a href="/" class="flex items-center pb-4 border-b border-b-gray-800">
+          <img src="https://substackcdn.com/image/fetch/w_96,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F68099c7c-403a-4e09-98b6-28297086a36b_425x425.png" alt="" class="w-8 h-8 rounded object-cover">
+          <span class="text-lg font-bold text-white ml-3">FyleHealth</span>
+      </a>
+      <ul class="mt-4">
+          <li class="mb-1 group">
+              <a href="/" routerLinkActive="active-link" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                  <i class="ri-home-2-line mr-3 text-lg"></i>
+                  <span class="text-sm">Home</span>
+                  <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+              </a>
+          </li>
+          <li class="mb-1 group">
+              <a href="/workout" routerLinkActive="active-link" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                  <i class="ri-instance-line mr-3 text-lg"></i>
+                  <span class="text-sm">Add Workout</span>
+                  <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+              </a>
+          </li>
+          <li class="mb-1 group">
+              <a href="/workoutlist" routerLinkActive="active-link" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+                  <i class="ri-flashlight-line mr-3 text-lg"></i>
+                  <span class="text-sm">Workout(s) List</span>
+                  <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+              </a>
+          </li>
+          <li class="mb-1 group">
+              <a href="/workoutprogress" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                  <i class="ri-settings-2-line mr-3 text-lg"></i>
+                  <span class="text-sm">Workout Progress</span>
+                  <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+              </a>
+          </li>
+      </ul>
+  </div>
+  <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
+  <!-- end: Sidebar -->
+
+  <!-- start: Main -->
+  <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
+      <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
+          <ul class="flex items-center text-sm ml-4">
+              <li class="mr-2">
+                  <a href="#" class="text-gray-400 hover:text-gray-600 font-medium">Your Dashboard</a>
+              </li>
+          </ul>
+          <ul class="ml-auto flex items-center">
+              <li class="dropdown ml-3">
+                  <button type="button" class="dropdown-toggle flex items-center">
+                      <img src="https://i1.wp.com/a.slack-edge.com/df10d/img/avatars/ava_0017-192.png?ssl=1" alt="" class="w-8 h-8 rounded block object-cover align-middle">
+                  </button>
+              </li>
+          </ul>
+      </div>
+    <div class="p-6">
+          <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-6">
+            <router-outlet></router-outlet>
+          </div>
+      </div>
+  </main>
+  <!-- end: Main -->
+
+  <!-- <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="dist/js/script.js"></script> -->

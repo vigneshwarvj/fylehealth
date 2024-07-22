@@ -1,0 +1,65 @@
+<div class="p-6">
+  <form [formGroup]="workoutForm" (ngSubmit)="onSubmit()">
+    <div class="space-y-12">
+      <div class="border-b border-gray-900/10 pb-12">
+        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div class="sm:col-span-4">
+            <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+            <div class="mt-2">
+              <div class="flex shadow-sm ring-1 ring-gray-300 sm:max-w-md">
+                <input type="text" auto formControlName="username" id="username" autocomplete="username" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 placeholder:text-gray-400 sm:text-sm sm:leading-6" placeholder="janesmith">
+              </div>
+            </div>
+            <div *ngIf="hasError('username', 'required') && workoutForm.get('username')?.touched" class="error-message">
+              Username is required.
+            </div>
+            <div *ngIf="hasError('username', 'notUnique') && workoutForm.get('username')?.touched" class="error-message">
+              Username already exists.
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="sm:col-span-3">
+        <label for="workoutType" class="block text-sm font-medium leading-6 text-gray-900">Workout Type</label>
+        <div class="mt-2">
+          <select formControlName="workoutType" id="workoutType" class="block w-auto rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+            <option value="Cycling">Cycling</option>
+            <option value="Swimming">Swimming</option>
+            <option value="Running">Running</option>
+            <option value="Yoga">Yoga</option>
+          </select>
+        </div>
+        <div *ngIf="hasError('workoutType', 'required') && workoutForm.get('workoutType')?.touched" class="error-message">
+          Workout type is required.
+        </div>
+      </div>
+      <br>
+      <div class="sm:col-span-2">
+        <label for="minutes" class="block text-sm font-medium leading-6 text-gray-900">Workout Minutes</label>
+        <div class="mt-2">
+          <input type="number" formControlName="minutes" id="minutes" class="block w-auto rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        </div>
+        <div *ngIf="hasError('minutes', 'required') && workoutForm.get('minutes')?.touched" class="error-message">
+          Workout minutes is required.
+        </div>
+        <div *ngIf="hasError('minutes', 'min') && workoutForm.get('minutes')?.touched" class="error-message">
+          Workout minutes must be at least 1.
+        </div>
+        <div *ngIf="hasError('minutes', 'pattern') && workoutForm.get('minutes')?.touched" class="error-message">
+          Invalid workout minutes.
+        </div>
+      </div>
+
+      <br>
+      
+      <button type="submit" class="bg-gray-900 text-sm font-medium text-white py-2 px-4 rounded-md">
+        + Add Workout
+      </button>
+
+    </div>
+  </form>
+</div>
+<div *ngIf="showToast" class="success-message">
+  Workout added successfully!
+</div>

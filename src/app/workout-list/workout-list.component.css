@@ -1,0 +1,6 @@
+.no-items-found-message {
+    display: flex;
+    padding: 15px 10px 0px 10px;
+    justify-content: space-between;
+    margin-left: 440px;
+}
